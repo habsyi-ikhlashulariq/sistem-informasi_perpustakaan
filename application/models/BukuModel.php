@@ -13,10 +13,16 @@
          $query = $this->db->get('tbl_buku')->result_array();
          return $query;
      }
+     public function getAllKategori()
+     {
+         $query = $this->db->get('tbl_kategori_buku')->result_array();
+         return $query;
+     }
      public function AddBuku()
      {
          $data =[
              "kd_buku" => $this->input->post('kd_buku', true),
+             "kd_kategori_buku" => $this->input->post('kd_kategori_buku', true),
              "judul" => $this->input->post('judul', true),
              "penulis" => $this->input->post('penulis', true),
              "penerbit" => $this->input->post('penerbit', true),
@@ -40,6 +46,7 @@
      {
          $data =[
              "judul" => $this->input->post('judul', true),
+             "kd_kategori_buku" => $this->input->post('kd_kategori_buku', true),
              "penulis" => $this->input->post('penulis', true),
              "penerbit" => $this->input->post('penerbit', true),
              "thn_terbit" => $this->input->post('thn_terbit', true),             

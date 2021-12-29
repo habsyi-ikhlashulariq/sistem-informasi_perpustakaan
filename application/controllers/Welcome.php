@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		$this->load->model('BukuModel');
 		$this->load->model('AnggotaModel');
-		$this->load->model('PegawaiModel');
+		$this->load->model('UserModel');
 		$this->load->model('PinjamanModel');
 		
 	}
@@ -32,14 +32,14 @@ class Welcome extends CI_Controller {
 		if (!$this->session->userdata('username') ) {
 			redirect('login');
 		}else {
-			$data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+			$data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
 			$this->session->userdata('kd_pegawai')])->row_array();
 			
 			
 			$data['countBuku'] = $this->BukuModel->countBuku();
 			$data['countAnggota'] = $this->AnggotaModel->countAnggota();
-			$data['countPegawaiPe'] = $this->PegawaiModel->countPegawaiPe();
-			$data['countPegawai'] = $this->PegawaiModel->countPegawai();
+			$data['countPegawaiPe'] = $this->UserModel->countPegawaiPe();
+			$data['countPegawai'] = $this->UserModel->countPegawai();
 			$data['countPeminjaman'] = $this->PinjamanModel->countPeminjaman();
 
 			

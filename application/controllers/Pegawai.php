@@ -9,7 +9,7 @@ class Pegawai extends CI_Controller
      if (!$this->session->userdata('username') ) {
         redirect('Login');
     }else {
-        $this->load->model('PegawaiModel');  
+        $this->load->model('UserModel');  
         $this->load->library('form_validation'); 
     }
     }
@@ -17,13 +17,13 @@ class Pegawai extends CI_Controller
     {
         $data['judul'] = 'Daftar Data Pegawai';
         if ($this->session->userdata('level') == "Petugas Perpustakaan") {
-            $data['pegawai'] = $this->db->get_where('tbl_pegawai', ['level' => $this->session->userdata('level')])->result_array();
+            $data['pegawai'] = $this->db->get_where('tbl_user', ['level' => $this->session->userdata('level')])->result_array();
         }else if ($this->session->userdata('level') == "Kepala Perpustakaan") {
-            $data['pegawai'] = $this->PegawaiModel->getAllPegawai();
+            $data['pegawai'] = $this->UserModel->getAllPegawai();
         } 
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
         if ( $this->input->post('keyword')) {
-            $data['pegawai'] = $this->PegawaiModel->searchData();
+            $data['pegawai'] = $this->UserModel->searchData();
         }
 
         $this->load->view('templates/header',$data);
@@ -33,12 +33,12 @@ class Pegawai extends CI_Controller
     public function tambah()
     {
         $data['judul'] = 'Tambah Data Pegawai';
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
         
         $this->form_validation->set_rules('kd_pegawai', 'Kode Pegawai', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[tbl_pegawai.username]');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[tbl_user.username]');
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]');
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
         $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required|trim');
@@ -51,7 +51,7 @@ class Pegawai extends CI_Controller
             $this->load->view('pegawai/tambah', $data);
             $this->load->view('templates/footer');
         }else{
-            $this->PegawaiModel->addPegawai();
+            $this->UserModel->addPegawai();
             $this->session->set_flashdata('flash', 'Ditambah');
             redirect('Pegawai');
         }
@@ -59,8 +59,8 @@ class Pegawai extends CI_Controller
     public function update($id)
     {
         $data['judul'] = 'Tambah Data Pegawai';
-        $data['pegawai'] = $this->PegawaiModel->getPegawaibyId($id);
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['pegawai'] = $this->UserModel->getPegawaibyId($id);
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
         $data['jk'] = ['Laki-Laki', 'Perempuan'];
         
@@ -78,14 +78,14 @@ class Pegawai extends CI_Controller
             $this->load->view('pegawai/update', $data);
             $this->load->view('templates/footer');
         }else{
-            $this->PegawaiModel->updatePegawai();
+            $this->UserModel->updatePegawai();
             $this->session->set_flashdata('flash', 'Diupdate');
             redirect('Pegawai');
         }
     }
     public function delete($id)
     {
-        $this->PegawaiModel->deletePegawai($id);
+        $this->UserModel->deletePegawai($id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('Pegawai');
     }

@@ -25,6 +25,11 @@
 											<h3 class="panel-title"><?= $judul; ?></h3><br>
 											<?php if ($this->session->userdata('level') == "Kepala Perpustakaan") : ?>
 												<a href="<?= base_url('pegawai/tambah') ?>" class="btn btn-primary"> <i class="lnr lnr-plus-circle"></i> <span>Tambah Data Pegawai</span></a>
+
+												<a class="btn btn-default" href="<?php echo base_url('import/pegawai_format');?>" target="_blank"><i class="lnr lnr-download"></i> <span>Download Excel Format</a>
+
+												<a href="<?= base_url('import/pegawai') ?>" class="btn btn-success"><i class="lnr lnr-upload"></i> <span>Import Pegawai</span></a>
+
 											<?php endif; ?>
 											</div>
 								<div class="panel-body">

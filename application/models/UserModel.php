@@ -1,22 +1,22 @@
 <?php 
 
-class PegawaiModel extends CI_Model
+class UserModel extends CI_Model
 {
     public function countPegawaiPe()
     {
-        $sql = "SELECT count(nama) as nama FROM tbl_pegawai WHERE level = 'Petugas Perpustakaan'";
+        $sql = "SELECT count(nama) as nama FROM tbl_user WHERE level = 'Petugas Perpustakaan'";
         $result = $this->db->query($sql);
         return $result->row()->nama;
     }
     public function countPegawai()
     {
-        $sql = "SELECT count(nama) as nama FROM tbl_pegawai";
+        $sql = "SELECT count(nama) as nama FROM tbl_user";
         $result = $this->db->query($sql);
         return $result->row()->nama;
     }
     public function getAllPegawai()
     {
-        $query = $this->db->get('tbl_pegawai')->result_array();
+        $query = $this->db->get('tbl_user')->result_array();
         return $query;
     }
     public function addPegawai()
@@ -33,12 +33,12 @@ class PegawaiModel extends CI_Model
             "level" => $this->input->post('level'),
         ];
 
-        $this->db->insert('tbl_pegawai', $data);
+        $this->db->insert('tbl_user', $data);
     }
     public function getPegawaibyId($id)
     {
         $data = ['kd_pegawai' => $id];
-        $query = $this->db->get_where('tbl_pegawai',$data)->row_array();
+        $query = $this->db->get_where('tbl_user',$data)->row_array();
         return $query;
     }
     public function updatePegawai($id)
@@ -53,13 +53,13 @@ class PegawaiModel extends CI_Model
             "level" => $this->input->post('level'),
         ];
         $this->db->where('kd_pegawai', $this->input->post('kd_pegawai'));
-        $this->db->update('tbl_pegawai', $data);
+        $this->db->update('tbl_user', $data);
     }
 
     public function deletePegawai($id)
     {
         $this->db->where('kd_pegawai', $id);
-        $this->db->delete('tbl_pegawai');
+        $this->db->delete('tbl_user');
     }
     public function searchData()
     {
@@ -70,7 +70,7 @@ class PegawaiModel extends CI_Model
         $this->db->or_like('jk', $keyword);
         $this->db->or_like('alamat', $keyword);
 
-        $query = $this->db->get('tbl_pegawai')->result_array();
+        $query = $this->db->get('tbl_user')->result_array();
         return $query;
     }
 }

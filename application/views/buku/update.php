@@ -16,6 +16,18 @@
                                     <form action="" method="post">
 										<input type="hidden" class="form-control" placeholder="Kode Buku" name="kd_buku" value="<?= $buku['kd_buku'] ?>">
 										<br>
+										<label for="kd_buku">Kategori Buku :</label>
+										<select name="kd_kategori_buku" id="" class="form-control">
+											<?php 
+											foreach ($kategori as $val) { 
+											if ($buku['kd_kategori_buku'] == $val['kd_kategori_buku']) {?>
+												<option value="<?= $val['kd_kategori_buku'] ?>" selected><?= $val['nama'] ?></option>
+												<?php }else{ ?>
+												<option value="<?= $val['kd_kategori_buku'] ?>"><?= $val['nama'] ?></option>
+											<?php } } ?>
+										</select>
+										<small class="form-text text-danger"><?= form_error('kd_kategori_buku'); ?></small>
+										<br>
 										<label for="judul">Judul Buku :</label>
 										<input type="text" class="form-control" placeholder="Judul Buku" name="judul" value="<?= $buku['judul'] ?>">
 										<small class="form-text text-danger"><?= form_error('judul'); ?></small>

@@ -19,7 +19,7 @@ class Anggota extends CI_Controller
     {
         $data['judul'] = 'Daftar Anggota';
         $data['anggota'] = $this->AnggotaModel->getAllAnggota();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         if ( $this->input->post('keyword')) {
@@ -40,7 +40,7 @@ class Anggota extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             
-            $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+            $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
             $data['judul'] = 'Tambah Data Anggota';
             $this->load->view('templates/header', $data);
             $this->load->view('anggota/tambah', $data);
@@ -62,7 +62,7 @@ class Anggota extends CI_Controller
         $data['judul'] = 'Update Data Anggota';
         $data['anggota'] = $this->AnggotaModel->getDatabyId($id);
 
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
         
         $data['jk'] =['Laki-Laki', 'Perempuan'];
@@ -89,7 +89,7 @@ class Anggota extends CI_Controller
     {
         $data['judul'] = 'Laporan Data Anggota';
         $data['anggota'] = $this->AnggotaModel->getAllAnggota();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         $this->load->view('templates/header',$data);

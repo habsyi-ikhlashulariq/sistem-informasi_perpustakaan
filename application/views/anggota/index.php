@@ -24,6 +24,10 @@
 									<div class="panel-heading">
 										<h3 class="panel-title"><?= $judul; ?></h3><br>
 									<a href="<?= base_url('anggota/tambah') ?>" class="btn btn-primary"><i class="lnr lnr-plus-circle"></i> <span>Tambah Data Anggota</span></a>
+
+									<a class="btn btn-default" href="<?php echo base_url('import/anggota_format');?>" target="_blank"><i class="lnr lnr-download"></i> <span>Download Excel Format</a>
+
+									<a href="<?= base_url('import/anggota') ?>" class="btn btn-success"><i class="lnr lnr-upload"></i> <span>Import Anggota</span></a>
 								</div>
 								<div class="panel-body">
 									<table class="table table-hover">

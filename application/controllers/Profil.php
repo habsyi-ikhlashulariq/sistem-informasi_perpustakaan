@@ -15,7 +15,7 @@ class Profil extends CI_Controller
     public function index()
     {
         $data['judul'] = 'My Profil';
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('profil/index', $data);
@@ -24,8 +24,8 @@ class Profil extends CI_Controller
     public function uploadPhoto()
     {
         $data['judul'] = 'Upload Photo';
-        $data['pegawai'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+        $data['pegawai'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -40,7 +40,7 @@ class Profil extends CI_Controller
     public function changePass()
     {
         $data['judul'] = 'Change Password';
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => $this->session->userdata('kd_pegawai')])->row_array();
 
         $this->form_validation->set_rules('pass_lama', 'Password Lama', 'required|trim');
         $this->form_validation->set_rules('pass_baru', 'Password Baru', 'required|trim|matches[confirm_pass]');
@@ -67,7 +67,7 @@ class Profil extends CI_Controller
                     $password_hash = password_hash($password_baru, PASSWORD_DEFAULT);
                     $this->db->set('password', $password_hash);
                     $this->db->where('kd_pegawai', $this->session->userdata('kd_pegawai'));
-                    $this->db->update('tbl_pegawai');
+                    $this->db->update('tbl_user');
                     $this->session->set_flashdata('message', '<div class="alert alert-success" 
                     role="alert">Anda Berhasil Mengganti Password</div>');
                     redirect('profil');
@@ -82,7 +82,7 @@ class Profil extends CI_Controller
     {
         $data['judul'] = 'Update Profil';
         $data['jk'] = ['Laki-Laki', 'Perempuan'];
-        $data['user'] = $this->db->get_where('tbl_pegawai', 
+        $data['user'] = $this->db->get_where('tbl_user', 
         ['username' => $this->session->userdata('username')])->row_array();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
@@ -126,7 +126,7 @@ class Profil extends CI_Controller
             $this->db->set('telp', $telp);
             $this->db->set('alamat', $alamat);
             $this->db->where('username', $username);
-            $this->db->update('tbl_pegawai');
+            $this->db->update('tbl_user');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" 
             role="alert">Anda Berhasil Mengupdate Profil</div>');

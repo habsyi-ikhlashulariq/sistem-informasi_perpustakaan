@@ -24,7 +24,7 @@ class Login extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		$user = $this->db->get_where('tbl_pegawai', ['username' => $username])->row_array();
+		$user = $this->db->get_where('tbl_user', ['username' => $username])->row_array();
 		if ($user) {
 			if (password_verify($password, $user['password'])) {
 				$data = [

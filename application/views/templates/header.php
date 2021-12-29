@@ -60,6 +60,9 @@
 							<a href="<?= site_url('Welcome') ?>" ><i class="lnr lnr-home"></i> <span>Dashboard</span></a>
 						</li>
 						<li <?= $this->uri->segment('1') == "Buku" ? 'class="active"': '' ?>>
+							<a href="<?= base_url('Kategori') ?>" ><i class="lnr lnr-inbox"></i> <span>Data Kategori Buku</span></a>
+						</li>
+						<li <?= $this->uri->segment('1') == "Buku" ? 'class="active"': '' ?>>
 							<a href="<?= base_url('Buku') ?>" ><i class="lnr lnr-inbox"></i> <span>Data Buku</span></a>
 						</li>
 						<li>

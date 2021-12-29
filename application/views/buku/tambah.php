@@ -19,6 +19,18 @@
 										value="<?= $kd ?>" readonly>
 										<small class="form-text text-danger"><?= form_error('kd_buku'); ?></small>
 										<br>
+										<label for="kd_buku">Kategori Buku :</label>
+										<select name="kd_kategori_buku" id="" class="form-control">
+											<?php 
+												foreach ($kategori as $val) {
+											?>
+											<option value="<?= $val['kd_kategori_buku'] ?>"><?= $val['nama'] ?></option>
+											<?php 
+											}
+											 ?>
+										</select>
+										<small class="form-text text-danger"><?= form_error('kd_kategori_buku'); ?></small>
+										<br>
 										<label for="judul">Judul Buku :</label>
 										<input type="text" class="form-control" placeholder="Judul Buku" name="judul" 
 										value="<?= set_value('judul'); ?>">

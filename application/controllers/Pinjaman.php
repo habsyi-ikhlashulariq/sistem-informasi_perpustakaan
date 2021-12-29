@@ -17,7 +17,7 @@ class Pinjaman extends CI_Controller{
         $data['pinjaman'] = $this->PinjamanModel->getPinjamanAll();
 
 
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         if ( $this->input->post('keyword')) {
@@ -35,7 +35,7 @@ class Pinjaman extends CI_Controller{
         $data['kd'] = $this->PinjamanModel->kd_peminjaman();
         $data['buku'] = $this->PinjamanModel->getBukubyId($id);
 
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
         
         $notif = $this->db->get_where('tbl_anggota', ['kd_anggota' => 
@@ -75,7 +75,7 @@ class Pinjaman extends CI_Controller{
     {
         $data['judul'] = 'Pilih Buku';
         $data['buku'] = $this->PinjamanModel->getBukuAll();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         if ( $this->input->post('keyword')) {
@@ -104,7 +104,7 @@ class Pinjaman extends CI_Controller{
         $data['judul'] = 'Laporan Data Pinjam Buku';
         $data['pinjaman'] = $this->PinjamanModel->getPengembalianAll();
 
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         $this->load->view('templates/header',$data);

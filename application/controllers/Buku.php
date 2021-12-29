@@ -14,7 +14,7 @@ class Buku extends CI_Controller
     {
         $data['judul'] = 'Daftar Buku';
         $data['buku'] = $this->BukuModel->getAllBuku();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         if ( $this->input->post('keyword')) {
@@ -28,16 +28,19 @@ class Buku extends CI_Controller
     public function tambah()
     {
         $this->form_validation->set_rules('kd_buku', 'Kode Buku', 'required');
+        $this->form_validation->set_rules('kd_kategori_buku', 'Kode Katgori Buku', 'required');
         $this->form_validation->set_rules('judul', 'Judul Buku', 'required');
         $this->form_validation->set_rules('penulis', 'Pengarang Buku', 'required');
         $this->form_validation->set_rules('penerbit', 'Penerbit Buku', 'required');
         $this->form_validation->set_rules('thn_terbit', 'Tahun Terbit Buku', 'required');
         $this->form_validation->set_rules('jml_buku', 'Jumlah Buku', 'required');
         
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
+        
 
         $data['kd'] = $this->BukuModel->kd_buku();
+        $data['kategori'] = $this->BukuModel->getAllKategori();
         
         if ($this->form_validation->run() == FALSE ) {
             $data['judul'] = 'Tambah Buku';
@@ -59,16 +62,18 @@ class Buku extends CI_Controller
     public function update($id)
     {
         $this->form_validation->set_rules('kd_buku', 'Kode Buku', 'required');
+        $this->form_validation->set_rules('kd_kategori_buku', 'Kode Katgori Buku', 'required');
         $this->form_validation->set_rules('judul', 'Judul Buku', 'required');
         $this->form_validation->set_rules('penulis', 'Pengarang Buku', 'required');
         $this->form_validation->set_rules('penerbit', 'Penerbit Buku', 'required');
         $this->form_validation->set_rules('thn_terbit', 'Tahun Terbit Buku', 'required');
         $this->form_validation->set_rules('jml_buku', 'Jumlah Buku', 'required');
         
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         $data['buku'] = $this->BukuModel->getBukubyId($id);
+        $data['kategori'] = $this->BukuModel->getAllKategori();
 
         if ($this->form_validation->run() == FALSE ) {
             $data['judul'] = 'Update Buku';
@@ -86,7 +91,7 @@ class Buku extends CI_Controller
     {
         $data['judul'] = 'Laporan Data Buku';
         $data['buku'] = $this->BukuModel->getAllBuku();
-        $data['user'] = $this->db->get_where('tbl_pegawai', ['kd_pegawai' => 
+        $data['user'] = $this->db->get_where('tbl_user', ['kd_pegawai' => 
         $this->session->userdata('kd_pegawai')])->row_array();
 
         $this->load->view('templates/header', $data);
